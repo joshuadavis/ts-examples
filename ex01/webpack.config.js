@@ -12,9 +12,14 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
+    optimization: {
+        runtimeChunk: 'single',
+    },
     devServer: {
         open: true,
         host: 'localhost',
+        // We're just serving up the bundled content here.
+        static: './dist',
     },
     plugins: [
         new HtmlWebpackPlugin({
