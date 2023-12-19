@@ -1,7 +1,6 @@
 
 import {irand, isqrt, seed_rand} from "./math";
 import Grid from "./grid"
-import * as assert from "assert";
 
 const DEFAULT_SMOOTH = 5
 const DEFAULT_WATER_RATIO = 70
