@@ -3,10 +3,11 @@ import './App.css';
 
 import World from './world';
 import Grid from './grid';
+import { irand } from './math';
 
 function App() {
     const grid: Grid = new Grid();
-    const seed = 1234
+    const seed = irand(9999)
     const world = new World(grid, seed);
 
     return (

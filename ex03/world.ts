@@ -126,7 +126,7 @@ function regen_land(conf: MapConfig, placed: number): number {
     let num_land = 0
 
     for(let i = 0; i < conf.size; i++) {
-        if (conf.real_map[i].onBoard && conf.real_map[i].contents == MAP_LAND) {
+        if (conf.real_map[i].onBoard && conf.real_map[i].contents === MAP_LAND) {
             conf.land[num_land] = i
             num_land++
         }
