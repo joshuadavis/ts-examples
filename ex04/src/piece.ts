@@ -1,4 +1,4 @@
-import {UNOWNED} from "./map";
+import {UNOWNED} from "./types";
 
 export type PieceInfoOrNull = PieceInfo | null;
 
