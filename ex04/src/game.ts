@@ -63,7 +63,7 @@ export function make_map(game: Game) {
             r = new RealMap(MAP_SEA)
         let j = game.grid.loc_col(i)
         let k = game.grid.loc_row(i)
-        r.on_board = !(j == 0 || j == game.grid.width - 1 || k == 0 || k == game.grid.height - 1)
+        r.on_board = !(j === 0 || j == game.grid.width - 1 || k === 0 || k === game.grid.height - 1)
         real_map[i] = r
     }
     game.real_map = real_map
@@ -84,7 +84,7 @@ function regen_land(game: Game, placed: number): number {
     let num_land = 0
 
     for(let i = 0; i < game.grid.size; i++) {
-        if (game.real_map[i].on_board && game.real_map[i].contents == MAP_LAND) {
+        if (game.real_map[i].on_board && game.real_map[i].contents === MAP_LAND) {
             game.land[num_land] = i
             num_land++
         }
@@ -106,7 +106,7 @@ export function place_cities(game: Game) {
     let num_land = 0
     let placed = 0
     while (placed < game.numCity) {
-        while (num_land == 0) num_land = regen_land(game, placed)
+        while (num_land === 0) num_land = regen_land(game, placed)
         let i = game.irand(num_land - 1) /* select random piece of land */
         let loc = game.land[i]
         game.city[placed] = new CityInfo(loc)
@@ -176,7 +176,7 @@ export function init_game(game: Game) {
 
     do {
         for (let i = 0; i < MAP_SIZE; i++) { /* remove cities */
-            if (game.real_map[i].contents == MAP_CITY)
+            if (game.real_map[i].contents === MAP_CITY)
                 game.real_map[i].contents = MAP_LAND; /* land */
         }
         place_cities(game); /* place cities on game.real_map */
