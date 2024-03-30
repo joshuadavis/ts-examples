@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Modal from 'react-modal';
 
 type CellType = string | null;
 type RowType = CellType[];
@@ -56,7 +57,6 @@ const GameBoard: React.FC = () => {
 
     const updateGrid = (rowIndex: number, columnIndex: number) => {
         const newGrid = [...grid];
-        console.log(`rowIndex=${rowIndex} columnIndex=${columnIndex}`)
         newGrid[rowIndex][columnIndex] = newGrid[rowIndex][columnIndex] ? null : 'X';
         setGrid(newGrid);
     };
@@ -75,10 +75,44 @@ const GameBoard: React.FC = () => {
     );
 }
 
-const App: React.FC = () => (
-    <div>
-        <GameBoard/>
-    </div>
-);
+// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root');
+
+
+const App: React.FC = () => {
+    const [showHelp, setShowHelp] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === '?') {
+                setShowHelp(true);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
+    return (
+        <div>
+            <div>? for help</div>
+            <GameBoard />
+
+            <Modal className='Modal' overlayClassName='Overlay'
+                isOpen={showHelp}
+                onRequestClose={() => setShowHelp(false)}
+                contentLabel="Help Panel">
+                {<div>
+                    This is the help modal.<br/>
+                    esc to go back
+                </div>}
+            </Modal>
+        </div>
+    );
+}
+
 
 export default App;
