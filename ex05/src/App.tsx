@@ -39,8 +39,9 @@ const Row: React.FC<RowProps> = ({cells, rowIndex, onCellClick}) => (
 function initialState(): Array<RowType> {
     const height = 20;
     const width = 80;
-    const rows = Array<RowType>(height).fill(Array<CellType>(width).fill(null));
+    const rows = Array<RowType>(height);
     for(let i = 0; i < height; i++) {
+        rows[i] = Array<CellType>(width).fill(null);
         for (let j = 0 ; j < width ; j++) {
             const value = (i * width + j).toString(16);
             rows[i][j] = value.charAt(value.length - 1);
