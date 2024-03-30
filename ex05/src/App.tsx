@@ -1,38 +1,30 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import './App.css';
 
 type CellType = string | null;
 type RowType = CellType[];
 
-interface CellProps{
+interface CellProps {
     cell: CellType;
     onClick: () => void;
 }
 
-const Cell: React.FC<CellProps> = ({ cell, onClick }) => (
+const Cell: React.FC<CellProps> = ({cell, onClick}) => (
     <div
-        style={{
-            width: '12px',
-            height: '12px',
-            border: '1px solid black',
-            cursor: 'pointer',
-            fontSize: '10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-        }}
+        className='cell'
         onClick={onClick}
     >
         {cell}
     </div>
 );
 
-interface RowProps{
+interface RowProps {
     cells: RowType;
     rowIndex: number;
     onCellClick: (rowIndex: number, columnIndex: number) => void;
 }
 
-const Row: React.FC<RowProps> = ({ cells, rowIndex, onCellClick }) => (
+const Row: React.FC<RowProps> = ({cells, rowIndex, onCellClick}) => (
     <div style={{display: 'flex'}}>
         {cells.map((cell, i) => (
             <Cell
@@ -44,11 +36,16 @@ const Row: React.FC<RowProps> = ({ cells, rowIndex, onCellClick }) => (
     </div>
 );
 
-function initialState() : Array<RowType> {
-    let rows = Array<RowType>(20)
-    rows.forEach( (row, rowIndex, rowArray) => {
-        rowArray[rowIndex] = Array(80).fill(null);
-    })
+function initialState(): Array<RowType> {
+    const height = 20;
+    const width = 80;
+    const rows = Array<RowType>(height).fill(Array<CellType>(width).fill(null));
+    for(let i = 0; i < height; i++) {
+        for (let j = 0 ; j < width ; j++) {
+            const value = (i * width + j).toString(16);
+            rows[i][j] = value.charAt(value.length - 1);
+        }
+    }
     return rows;
 }
 
@@ -58,6 +55,7 @@ const GameBoard: React.FC = () => {
 
     const updateGrid = (rowIndex: number, columnIndex: number) => {
         const newGrid = [...grid];
+        console.log(`rowIndex=${rowIndex} columnIndex=${columnIndex}`)
         newGrid[rowIndex][columnIndex] = newGrid[rowIndex][columnIndex] ? null : 'X';
         setGrid(newGrid);
     };
@@ -78,7 +76,7 @@ const GameBoard: React.FC = () => {
 
 const App: React.FC = () => (
     <div>
-        <GameBoard />
+        <GameBoard/>
     </div>
 );
 

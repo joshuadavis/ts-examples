@@ -43,6 +43,7 @@
   border: 1px solid black;
   cursor: pointer;
   font-size: 10px;
+  font-family: 'Courier New', monospace;
   display: flex;
   align-items: center;
   justify-content: center;
