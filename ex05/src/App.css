@@ -20,7 +20,7 @@
 .Modal {
   margin: 50px;
   padding: 50px;
-  background-color: var(--background-color) !important;;
+  background-color: var(--background-color);
   color: var(--color);
 }
 
@@ -33,13 +33,33 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.GameBoard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.header-row {
+}
+
+.header-row, .row {
+  display: flex;
+}
+
+.cell, .header-cell {
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+}
+
+.header-cell {
+}
+
 .cell {
-  width: 12px;
-  height: 24px;
+  width: 1rem;
+  height: 2rem;
+  flex-shrink: 0;
   border: 1px solid black;
   cursor: pointer;
-  font-size: 12px;
-  font-family: 'Courier New', monospace;
   display: flex;
   align-items: center;
   justify-content: center;
